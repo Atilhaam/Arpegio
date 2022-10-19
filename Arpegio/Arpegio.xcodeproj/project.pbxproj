@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,9 +12,12 @@
 		6793F1C428FEEAC600B84B5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793F1C328FEEAC600B84B5B /* ViewController.swift */; };
 		6793F1C928FEEAC800B84B5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6793F1C828FEEAC800B84B5B /* Assets.xcassets */; };
 		6793F1CC28FEEAC800B84B5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6793F1CA28FEEAC800B84B5B /* LaunchScreen.storyboard */; };
+		CDB623A01BA4DE93F9813D0D /* Pods_Arpegio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D82085D807D28C7EEB16741 /* Pods_Arpegio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1701FB231AB967FF284F611E /* Pods-Arpegio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arpegio.debug.xcconfig"; path = "Target Support Files/Pods-Arpegio/Pods-Arpegio.debug.xcconfig"; sourceTree = "<group>"; };
+		4D82085D807D28C7EEB16741 /* Pods_Arpegio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Arpegio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6793F1BC28FEEAC600B84B5B /* Arpegio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Arpegio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6793F1BF28FEEAC600B84B5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6793F1C128FEEAC600B84B5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		6793F1C828FEEAC800B84B5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6793F1CB28FEEAC800B84B5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6793F1CD28FEEAC800B84B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC3FC38B4846AEAF0A652170 /* Pods-Arpegio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arpegio.release.xcconfig"; path = "Target Support Files/Pods-Arpegio/Pods-Arpegio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDB623A01BA4DE93F9813D0D /* Pods_Arpegio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3107C79CF78234C77D26708E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1701FB231AB967FF284F611E /* Pods-Arpegio.debug.xcconfig */,
+				FC3FC38B4846AEAF0A652170 /* Pods-Arpegio.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6793F1B328FEEAC600B84B5B = {
 			isa = PBXGroup;
 			children = (
 				6793F1BE28FEEAC600B84B5B /* Arpegio */,
 				6793F1BD28FEEAC600B84B5B /* Products */,
+				3107C79CF78234C77D26708E /* Pods */,
+				7743F035025F792D44768624 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +97,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7743F035025F792D44768624 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D82085D807D28C7EEB16741 /* Pods_Arpegio.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -87,9 +112,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6793F1D028FEEAC800B84B5B /* Build configuration list for PBXNativeTarget "Arpegio" */;
 			buildPhases = (
+				0564901FFFCA284203F393F8 /* [CP] Check Pods Manifest.lock */,
 				6793F1B828FEEAC600B84B5B /* Sources */,
 				6793F1B928FEEAC600B84B5B /* Frameworks */,
 				6793F1BA28FEEAC600B84B5B /* Resources */,
+				07B3C874A62B55825326183A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -116,7 +143,7 @@
 				};
 			};
 			buildConfigurationList = 6793F1B728FEEAC600B84B5B /* Build configuration list for PBXProject "Arpegio" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -144,6 +171,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0564901FFFCA284203F393F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Arpegio-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		07B3C874A62B55825326183A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Arpegio/Pods-Arpegio-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Arpegio/Pods-Arpegio-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Arpegio/Pods-Arpegio-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6793F1B828FEEAC600B84B5B /* Sources */ = {
@@ -286,6 +355,7 @@
 		};
 		6793F1D128FEEAC800B84B5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1701FB231AB967FF284F611E /* Pods-Arpegio.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -313,6 +383,7 @@
 		};
 		6793F1D228FEEAC800B84B5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC3FC38B4846AEAF0A652170 /* Pods-Arpegio.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
