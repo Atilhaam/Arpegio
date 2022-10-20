@@ -100,8 +100,12 @@ public final class WelcomeViewController: ASDKViewController<ASDisplayNode> {
     }
     
     @objc private func registerButtonTapped() {
-        let vc = RegisterViewController()
-        navigationController?.pushViewController(vc, animated: false)
+        
+//        DispatchQueue.main.async {
+            let vc = RegisterViewController()
+//            vc.view.backgroundColor = .white
+            self.navigationController?.pushViewController(vc, animated: true)
+//        }
     }
     
     

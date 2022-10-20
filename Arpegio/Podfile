@@ -14,5 +14,7 @@ target 'Arpegio' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'JGProgressHUD'
+  pod 'GoogleSignIn'
+
 
 end
