@@ -9,6 +9,8 @@ import UIKit
 import JGProgressHUD
 import FirebaseCore
 import FirebaseAuth
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController {
     private let spinner = JGProgressHUD(style: .dark)
@@ -52,7 +54,7 @@ class LoginViewController: UIViewController {
     
     private let loginButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "buttonMasuk"), for: .normal)
+        button.setImage(UIImage(named: "buttonMasukFail"), for: .normal)
         return button
     }()
     
@@ -61,11 +63,14 @@ class LoginViewController: UIViewController {
         button.setImage(UIImage(named: "buttonForgot"), for: .normal)
         return button
     }()
+    
+    private let disposebag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupView()
+        setupRx()
         // Do any additional setup after loading the view.
     }
     
@@ -79,6 +84,56 @@ class LoginViewController: UIViewController {
         view.addSubview(passwordField)
         view.addSubview(loginButton)
         view.addSubview(forgotButton)
+        loginButton.isEnabled = false
+        loginButton.imageView?.image = UIImage(named: "buttonMasukFail")
+        
+        let textfields: [UITextField] = [emailField,passwordField]
+        
+        for textfield in textfields {
+            setupTextFields(for: textfield)
+        }
+    }
+    
+    private func setupRx() {
+        let emailStream = emailField.rx.text
+            .orEmpty
+            .skip(1)
+            .map {self.isValidEmail(from: $0)}
+        emailStream.subscribe(
+            onNext: { value in
+                self.emailField.rightViewMode = value ? .never : .always
+            }
+        ).disposed(by: disposebag)
+        
+        let passwordStream = passwordField.rx.text
+            .orEmpty
+            .skip(1)
+            .map { $0.count > 5}
+        
+        passwordStream.subscribe(
+            onNext: { value in
+                self.passwordField.rightViewMode = value ? .never : .always
+            }
+        ).disposed(by: disposebag)
+        
+        let invalidStream = Observable.combineLatest(
+            emailStream,
+            passwordStream
+        ) { email, password in
+            email && password
+        }
+        
+        invalidStream.subscribe(onNext: { isValid in
+            if isValid {
+                self.loginButton.isEnabled = true
+                self.loginButton.imageView?.image = UIImage(named: "buttonMasukSuccess")
+            } else {
+                self.loginButton.isEnabled = false
+                self.loginButton.imageView?.image = UIImage(named: "buttonMasukFail")
+            }
+        }).disposed(by: disposebag)
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -104,6 +159,28 @@ class LoginViewController: UIViewController {
                                   width: view.frame.width - 40,
                                   height: 52)
         
+    }
+    
+    private func setupTextFields(for textField: UITextField) {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        button.frame = CGRect(
+            x: CGFloat(emailField.frame.size.width - 25),
+            y: CGFloat(5),
+            width: CGFloat(25),
+            height: CGFloat(25)
+        )
+        
+        switch textField {
+        case emailField:
+            button.addTarget(self, action: #selector(self.showEmailExistAlert(_:)), for: .touchUpInside)
+        case passwordField:
+            button.addTarget(self, action: #selector(self.showPasswordExistAlert(_:)), for: .touchUpInside)
+        default:
+            print("TextField not found")
+        }
+        textField.rightView = button
     }
     
     @objc private func loginButtonTapped() {
@@ -152,6 +229,37 @@ class LoginViewController: UIViewController {
     
     @objc private func forgotButtonTapped() {
         
+    }
+    
+    @IBAction func showEmailExistAlert(_ sender: Any) {
+        let alertController = UIAlertController(
+            title: "Your email is invalid.",
+            message: "Please double check your email format, for example like gilang@dicoding.com.",
+            preferredStyle: .alert
+        )
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showPasswordExistAlert(_ sender: Any) {
+        let alertController = UIAlertController(
+            title: "Your password is invalid.",
+            message: "Please double check the character length of your password.",
+            preferredStyle: .alert
+        )
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func isValidEmail(from email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
 
     func alertLoginUserError() {

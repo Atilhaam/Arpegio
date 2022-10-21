@@ -20,6 +20,7 @@
 		67C0B57028FFABE300644C22 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C0B56F28FFABE300644C22 /* LoginViewController.swift */; };
 		67C0B57428FFD84400644C22 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C0B57328FFD84400644C22 /* DatabaseManager.swift */; };
 		67C0B57628FFDB5800644C22 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C0B57528FFDB5800644C22 /* RegisterViewController.swift */; };
+		67C0B5782900E16100644C22 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C0B5772900E16100644C22 /* StorageManager.swift */; };
 		CDB623A01BA4DE93F9813D0D /* Pods_Arpegio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D82085D807D28C7EEB16741 /* Pods_Arpegio.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		67C0B56F28FFABE300644C22 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		67C0B57328FFD84400644C22 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		67C0B57528FFDB5800644C22 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		67C0B5772900E16100644C22 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		FC3FC38B4846AEAF0A652170 /* Pods-Arpegio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arpegio.release.xcconfig"; path = "Target Support Files/Pods-Arpegio/Pods-Arpegio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				6793F1C128FEEAC600B84B5B /* SceneDelegate.swift */,
 				67C0B56D28FFA7DF00644C22 /* Externsions.swift */,
 				67C0B57328FFD84400644C22 /* DatabaseManager.swift */,
+				67C0B5772900E16100644C22 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			files = (
 				67C0B56228FF8B7B00644C22 /* HomeViewController.swift in Sources */,
 				67C0B57628FFDB5800644C22 /* RegisterViewController.swift in Sources */,
+				67C0B5782900E16100644C22 /* StorageManager.swift in Sources */,
 				67C0B55F28FF8A7000644C22 /* MyTabBarViewController.swift in Sources */,
 				67C0B56828FF8CDB00644C22 /* WelcomeViewController.swift in Sources */,
 				67C0B56A28FF8D3F00644C22 /* ProfileViewController.swift in Sources */,

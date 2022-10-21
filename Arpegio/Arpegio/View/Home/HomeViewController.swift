@@ -32,7 +32,9 @@ public final class HomeViewController: ASDKViewController<ASScrollNode> {
         }
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
         validateAuth()
     }
     
