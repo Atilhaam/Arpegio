@@ -39,6 +39,29 @@ final class StorageManager {
         })
     }
     
+    public func uploadProductPicture(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
+        storage.child("productImages/\(fileName)").putData(data, metadata: nil, completion: { metadata, error in
+            guard error == nil else {
+                //failed
+                print("Failed to upload data to firebase for picture")
+                completion(.failure(StorageErrors.failedToUpload))
+                return
+            }
+            
+            self.storage.child("productImages/\(fileName)").downloadURL(completion: { url, error in
+                guard let url = url else {
+                    print("failed to get download url")
+                    completion(.failure(StorageErrors.failedToGetDownloadUrl))
+                    return
+                }
+                
+                let urlString = url.absoluteString
+                print("download url returned: \(urlString)")
+                completion(.success(urlString))
+            })
+        })
+    }
+    
     /// Upload image that will be sent in a conversation message
     public func uploadMessage(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
         storage.child("message_images/\(fileName)").putData(data, metadata: nil, completion: { metadata, error in

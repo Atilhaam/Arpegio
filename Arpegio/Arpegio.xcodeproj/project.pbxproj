@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67084F1F290F8CF600D71B43 /* AddCategoryProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67084F1E290F8CF600D71B43 /* AddCategoryProductViewController.swift */; };
+		67084F22290FA14D00D71B43 /* CategoryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67084F21290FA14D00D71B43 /* CategoryNode.swift */; };
+		67084F24290FA1B200D71B43 /* CategoryCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67084F23290FA1B200D71B43 /* CategoryCollectionNode.swift */; };
 		6793F1C028FEEAC600B84B5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793F1BF28FEEAC600B84B5B /* AppDelegate.swift */; };
 		6793F1C228FEEAC600B84B5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6793F1C128FEEAC600B84B5B /* SceneDelegate.swift */; };
 		6793F1C928FEEAC800B84B5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6793F1C828FEEAC800B84B5B /* Assets.xcassets */; };
@@ -21,12 +24,26 @@
 		67C0B57428FFD84400644C22 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C0B57328FFD84400644C22 /* DatabaseManager.swift */; };
 		67C0B57628FFDB5800644C22 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C0B57528FFDB5800644C22 /* RegisterViewController.swift */; };
 		67C0B5782900E16100644C22 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C0B5772900E16100644C22 /* StorageManager.swift */; };
+		67ED62E629062ACA00736D0C /* ItemCardCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67ED62E529062ACA00736D0C /* ItemCardCollectionNode.swift */; };
+		67ED62E92906385300736D0C /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67ED62E82906385300736D0C /* ItemModel.swift */; };
+		67ED62EB29063CB900736D0C /* DataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67ED62EA29063CB900736D0C /* DataGenerator.swift */; };
+		67EDEA792907698D008BC5A8 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EDEA782907698D008BC5A8 /* ItemNode.swift */; };
+		67EDEA7C29077804008BC5A8 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EDEA7B29077804008BC5A8 /* StoryModel.swift */; };
+		67EDEA7E2907785D008BC5A8 /* StoryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EDEA7D2907785D008BC5A8 /* StoryNode.swift */; };
+		67EDEA802907786D008BC5A8 /* StoryCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EDEA7F2907786D008BC5A8 /* StoryCollectionNode.swift */; };
+		67EDEA852908C506008BC5A8 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EDEA842908C506008BC5A8 /* AddProductViewController.swift */; };
+		67EDEA88290A4398008BC5A8 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EDEA86290A1B35008BC5A8 /* CustomTabBar.swift */; };
+		67EDEA8B290AA0DE008BC5A8 /* SearchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EDEA8A290AA0DE008BC5A8 /* SearchNode.swift */; };
+		67EDEA8D290AA4CE008BC5A8 /* TextFieldNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EDEA8C290AA4CE008BC5A8 /* TextFieldNode.swift */; };
 		CDB623A01BA4DE93F9813D0D /* Pods_Arpegio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D82085D807D28C7EEB16741 /* Pods_Arpegio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1701FB231AB967FF284F611E /* Pods-Arpegio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arpegio.debug.xcconfig"; path = "Target Support Files/Pods-Arpegio/Pods-Arpegio.debug.xcconfig"; sourceTree = "<group>"; };
 		4D82085D807D28C7EEB16741 /* Pods_Arpegio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Arpegio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67084F1E290F8CF600D71B43 /* AddCategoryProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryProductViewController.swift; sourceTree = "<group>"; };
+		67084F21290FA14D00D71B43 /* CategoryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNode.swift; sourceTree = "<group>"; };
+		67084F23290FA1B200D71B43 /* CategoryCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionNode.swift; sourceTree = "<group>"; };
 		6793F1BC28FEEAC600B84B5B /* Arpegio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Arpegio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6793F1BF28FEEAC600B84B5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6793F1C128FEEAC600B84B5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +60,17 @@
 		67C0B57328FFD84400644C22 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		67C0B57528FFDB5800644C22 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		67C0B5772900E16100644C22 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		67ED62E529062ACA00736D0C /* ItemCardCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCardCollectionNode.swift; sourceTree = "<group>"; };
+		67ED62E82906385300736D0C /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		67ED62EA29063CB900736D0C /* DataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGenerator.swift; sourceTree = "<group>"; };
+		67EDEA782907698D008BC5A8 /* ItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
+		67EDEA7B29077804008BC5A8 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
+		67EDEA7D2907785D008BC5A8 /* StoryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryNode.swift; sourceTree = "<group>"; };
+		67EDEA7F2907786D008BC5A8 /* StoryCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCollectionNode.swift; sourceTree = "<group>"; };
+		67EDEA842908C506008BC5A8 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
+		67EDEA86290A1B35008BC5A8 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		67EDEA8A290AA0DE008BC5A8 /* SearchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNode.swift; sourceTree = "<group>"; };
+		67EDEA8C290AA4CE008BC5A8 /* TextFieldNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldNode.swift; sourceTree = "<group>"; };
 		FC3FC38B4846AEAF0A652170 /* Pods-Arpegio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Arpegio.release.xcconfig"; path = "Target Support Files/Pods-Arpegio/Pods-Arpegio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +95,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		67084F1D290F5B4B00D71B43 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				67C0B57328FFD84400644C22 /* DatabaseManager.swift */,
+				67C0B5772900E16100644C22 /* StorageManager.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		67084F20290FA11C00D71B43 /* Category Collection */ = {
+			isa = PBXGroup;
+			children = (
+				67084F21290FA14D00D71B43 /* CategoryNode.swift */,
+				67084F23290FA1B200D71B43 /* CategoryCollectionNode.swift */,
+			);
+			path = "Category Collection";
+			sourceTree = "<group>";
+		};
 		6793F1B328FEEAC600B84B5B = {
 			isa = PBXGroup;
 			children = (
@@ -89,7 +135,10 @@
 			isa = PBXGroup;
 			children = (
 				67C0B56B28FF966000644C22 /* GoogleService-Info.plist */,
+				67084F1D290F5B4B00D71B43 /* Database */,
+				67EDEA89290AA0B6008BC5A8 /* Extensions */,
 				6793F1D428FEEB2900B84B5B /* View */,
+				67ED62E72906381200736D0C /* Model */,
 				6793F1D328FEEB1C00B84B5B /* Resources */,
 				6793F1C828FEEAC800B84B5B /* Assets.xcassets */,
 				6793F1CA28FEEAC800B84B5B /* LaunchScreen.storyboard */,
@@ -103,9 +152,6 @@
 			children = (
 				6793F1BF28FEEAC600B84B5B /* AppDelegate.swift */,
 				6793F1C128FEEAC600B84B5B /* SceneDelegate.swift */,
-				67C0B56D28FFA7DF00644C22 /* Externsions.swift */,
-				67C0B57328FFD84400644C22 /* DatabaseManager.swift */,
-				67C0B5772900E16100644C22 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -114,8 +160,10 @@
 			isa = PBXGroup;
 			children = (
 				67C0B56628FF8CB900644C22 /* Auth */,
+				67EDEA812908C288008BC5A8 /* Add Product */,
 				67C0B56328FF8C2E00644C22 /* Profile */,
 				67C0B56028FF8A7800644C22 /* Home */,
+				67EDEA7A290777BC008BC5A8 /* Coba Story */,
 				67C0B55D28FF8A5600644C22 /* TabBar */,
 			);
 			path = View;
@@ -125,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				67C0B55E28FF8A7000644C22 /* MyTabBarViewController.swift */,
+				67EDEA86290A1B35008BC5A8 /* CustomTabBar.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -133,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				67C0B56128FF8B7B00644C22 /* HomeViewController.swift */,
+				67084F20290FA11C00D71B43 /* Category Collection */,
+				67ED62EC290645C000736D0C /* ItemCardCollection */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -153,6 +204,53 @@
 				67C0B57528FFDB5800644C22 /* RegisterViewController.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		67ED62E72906381200736D0C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				67ED62E82906385300736D0C /* ItemModel.swift */,
+				67ED62EA29063CB900736D0C /* DataGenerator.swift */,
+				67EDEA7B29077804008BC5A8 /* StoryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		67ED62EC290645C000736D0C /* ItemCardCollection */ = {
+			isa = PBXGroup;
+			children = (
+				67ED62E529062ACA00736D0C /* ItemCardCollectionNode.swift */,
+				67EDEA782907698D008BC5A8 /* ItemNode.swift */,
+			);
+			path = ItemCardCollection;
+			sourceTree = "<group>";
+		};
+		67EDEA7A290777BC008BC5A8 /* Coba Story */ = {
+			isa = PBXGroup;
+			children = (
+				67EDEA7D2907785D008BC5A8 /* StoryNode.swift */,
+				67EDEA7F2907786D008BC5A8 /* StoryCollectionNode.swift */,
+			);
+			path = "Coba Story";
+			sourceTree = "<group>";
+		};
+		67EDEA812908C288008BC5A8 /* Add Product */ = {
+			isa = PBXGroup;
+			children = (
+				67084F1E290F8CF600D71B43 /* AddCategoryProductViewController.swift */,
+				67EDEA842908C506008BC5A8 /* AddProductViewController.swift */,
+			);
+			path = "Add Product";
+			sourceTree = "<group>";
+		};
+		67EDEA89290AA0B6008BC5A8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				67C0B56D28FFA7DF00644C22 /* Externsions.swift */,
+				67EDEA8A290AA0DE008BC5A8 /* SearchNode.swift */,
+				67EDEA8C290AA4CE008BC5A8 /* TextFieldNode.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7743F035025F792D44768624 /* Frameworks */ = {
@@ -279,15 +377,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				67C0B56228FF8B7B00644C22 /* HomeViewController.swift in Sources */,
+				67084F22290FA14D00D71B43 /* CategoryNode.swift in Sources */,
 				67C0B57628FFDB5800644C22 /* RegisterViewController.swift in Sources */,
+				67ED62E92906385300736D0C /* ItemModel.swift in Sources */,
+				67EDEA852908C506008BC5A8 /* AddProductViewController.swift in Sources */,
 				67C0B5782900E16100644C22 /* StorageManager.swift in Sources */,
 				67C0B55F28FF8A7000644C22 /* MyTabBarViewController.swift in Sources */,
+				67ED62EB29063CB900736D0C /* DataGenerator.swift in Sources */,
+				67EDEA792907698D008BC5A8 /* ItemNode.swift in Sources */,
+				67EDEA802907786D008BC5A8 /* StoryCollectionNode.swift in Sources */,
 				67C0B56828FF8CDB00644C22 /* WelcomeViewController.swift in Sources */,
 				67C0B56A28FF8D3F00644C22 /* ProfileViewController.swift in Sources */,
+				67EDEA8D290AA4CE008BC5A8 /* TextFieldNode.swift in Sources */,
+				67084F1F290F8CF600D71B43 /* AddCategoryProductViewController.swift in Sources */,
+				67ED62E629062ACA00736D0C /* ItemCardCollectionNode.swift in Sources */,
 				67C0B57028FFABE300644C22 /* LoginViewController.swift in Sources */,
 				6793F1C028FEEAC600B84B5B /* AppDelegate.swift in Sources */,
 				67C0B56E28FFA7DF00644C22 /* Externsions.swift in Sources */,
+				67EDEA8B290AA0DE008BC5A8 /* SearchNode.swift in Sources */,
+				67EDEA7E2907785D008BC5A8 /* StoryNode.swift in Sources */,
+				67EDEA88290A4398008BC5A8 /* CustomTabBar.swift in Sources */,
+				67EDEA7C29077804008BC5A8 /* StoryModel.swift in Sources */,
 				6793F1C228FEEAC600B84B5B /* SceneDelegate.swift in Sources */,
+				67084F24290FA1B200D71B43 /* CategoryCollectionNode.swift in Sources */,
 				67C0B57428FFD84400644C22 /* DatabaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +547,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,6 +576,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
