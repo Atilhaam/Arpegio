@@ -89,21 +89,6 @@ class AddProductViewController: UIViewController {
         return nameField
     }()
     
-    private let productYearField: UITextField = {
-        let nameField = UITextField()
-        nameField.autocapitalizationType = .none
-        nameField.autocorrectionType = .no
-        nameField.returnKeyType = .continue
-        nameField.layer.cornerRadius = 12
-        nameField.layer.borderWidth = 1
-        nameField.layer.borderColor = UIColor.lightGray.cgColor
-        nameField.placeholder = "Masukan Tahun Produk"
-        nameField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
-        nameField.leftViewMode = .always
-        nameField.backgroundColor = .white
-        return nameField
-    }()
-    
     private let productDescriptionField: UITextField = {
         let nameField = UITextField()
         nameField.autocapitalizationType = .none
@@ -134,6 +119,21 @@ class AddProductViewController: UIViewController {
         return nameField
     }()
     
+    private let contactTextfield: UITextField = {
+        let nameField = UITextField()
+        nameField.autocapitalizationType = .none
+        nameField.autocorrectionType = .no
+        nameField.returnKeyType = .continue
+        nameField.layer.cornerRadius = 12
+        nameField.layer.borderWidth = 1
+        nameField.layer.borderColor = UIColor.lightGray.cgColor
+        nameField.placeholder = "Masukan No Whatsapp"
+        nameField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+        nameField.leftViewMode = .always
+        nameField.backgroundColor = .white
+        return nameField
+    }()
+    
     private let tambahButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "buttonTambahSuccess"), for: .normal)
@@ -149,7 +149,8 @@ class AddProductViewController: UIViewController {
         self.title = "Masukan Detail Produk"
         setupView()
         print(category)
-        // Do any additional setup after loading the view.
+        scrollView.frame = view.bounds
+        scrollView.contentSize = self.view.frame.size
     }
     
     private func setupView() {
@@ -163,21 +164,18 @@ class AddProductViewController: UIViewController {
 //        view.addSubview(productYearField)
         scrollView.addSubview(productDescriptionField)
         scrollView.addSubview(productLocationField)
+        scrollView.addSubview(contactTextfield)
         scrollView.addSubview(tambahButton)
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        titleView.frame = CGRect(x: view.left + 40,
-//                                 y: view.height / 40,
-//                                 width: view.frame.width - 120,
-//                                 height: 52)
-        scrollView.frame = view.bounds
-        imageView.frame = CGRect(x: (view.frame.size.width - (view.frame.size.width / 3)) / 2,
-                                 y: view.height / 10,
-                                 width: view.frame.size.width / 3,
-                                 height: view.frame.size.width / 3)
+        let size = scrollView.width/3
+        imageView.frame = CGRect(x: (scrollView.width-size) / 2,
+                                 y: 20,
+                                 width: size,
+                                 height: size)
         productNameField.frame = CGRect(x: view.left + 20,
                                         y: imageView.bottom + 20,
                                         width: view.frame.width - 40,
@@ -190,10 +188,6 @@ class AddProductViewController: UIViewController {
                                         y: productPriceField.bottom + 20,
                                         width: view.frame.width - 40,
                                         height: 52)
-//        productYearField.frame = CGRect(x: view.left + 20,
-//                                        y: productConditionField.bottom + 20,
-//                                        width: view.frame.width - 40,
-//                                        height: 52)
         productDescriptionField.frame = CGRect(x: view.left + 20,
                                         y: productConditionField.bottom + 20,
                                         width: view.frame.width - 40,
@@ -202,8 +196,12 @@ class AddProductViewController: UIViewController {
                                         y: productDescriptionField.bottom + 20,
                                         width: view.frame.width - 40,
                                         height: 52)
-        tambahButton.frame = CGRect(x: view.left + 20,
+        contactTextfield.frame = CGRect(x: view.left + 20,
                                         y: productLocationField.bottom + 20,
+                                        width: view.frame.width - 40,
+                                        height: 52)
+        tambahButton.frame = CGRect(x: view.left + 20,
+                                        y: contactTextfield.bottom + 20,
                                         width: view.frame.width - 40,
                                         height: 52)
     }

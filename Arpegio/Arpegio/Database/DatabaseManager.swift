@@ -101,6 +101,7 @@ extension DatabaseManager {
                 print("user not found")
                 return
             }
+            
             let productId = UUID().uuidString
             let productData: [String: Any] = [
                 "id": productId,
@@ -166,6 +167,7 @@ extension DatabaseManager {
                     })
                 }
             })
+            
             //nambahin ke head productid
             self?.database.child("\(productId)").setValue(productData, withCompletionBlock: { error, _ in
                 guard error == nil else {
@@ -175,7 +177,7 @@ extension DatabaseManager {
                 completion(true)
             })
             
-            
+            //nambahin ke head user
             if var products = userNode["products"] as? [[String:Any]] {
                 products.append(productData)
                 userNode["products"] = products
@@ -203,12 +205,6 @@ extension DatabaseManager {
             
         })
     }
-    
-    ///insert new product to head productid and head products and head productcategory
-//    public func insertProductToManyHead(with product: ProductDetail, completion: @escaping (Bool) -> Void) {
-//        database.child(<#T##pathString: String##String#>)
-//
-//    }
     
     public func userExist(with email: String, completion: @escaping ((Bool) -> Void)) {
         

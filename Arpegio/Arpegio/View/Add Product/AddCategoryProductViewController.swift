@@ -34,10 +34,10 @@ class AddCategoryProductViewController: UIViewController {
         self.title = "Categories"
         tableView.delegate = self
         tableView.dataSource = self
-        let uid1 = UUID().uuidString
-        let uid2 = UUID().uuidString
-        print("ini uid1 \(uid1)")
-        print("ini uid2 \(uid2)")
+//        let uid1 = UUID().uuidString
+//        let uid2 = UUID().uuidString
+//        print("ini uid1 \(uid1)")
+//        print("ini uid2 \(uid2)")
         // Do any additional setup after loading the view.
     }
     
