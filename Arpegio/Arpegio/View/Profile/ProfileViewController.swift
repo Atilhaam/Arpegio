@@ -42,13 +42,14 @@ class ProfileViewController: ASDKViewController<ASScrollNode> {
 
             
         }
-//        print(Auth.auth().currentUser?.email)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if let email = Auth.auth().currentUser?.email {
             print(email)
         } else {
-            
+            print("kosong")
         }
-//        print("ini user satu \(FirebaseAuth.Auth.auth().currentUser?.email)")
     }
     
     required init?(coder: NSCoder) {

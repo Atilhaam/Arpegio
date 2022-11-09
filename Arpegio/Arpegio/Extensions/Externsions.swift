@@ -34,3 +34,34 @@ extension UIView {
         return self.frame.size.width + self.frame.origin.x
     }
 }
+
+extension String {
+
+    // formatting text for currency textField
+    func currencyInputFormatting() -> String {
+    
+        var number: NSNumber!
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "id_ID")
+        formatter.currencySymbol = "Rp"
+        formatter.groupingSeparator = "."
+        formatter.numberStyle = .currencyAccounting
+    
+        var amountWithPrefix = self
+    
+        // remove from String: "$", ".", ","
+        let regex = try! NSRegularExpression(pattern: "[^0-9]", options: .caseInsensitive)
+        amountWithPrefix = regex.stringByReplacingMatches(in: amountWithPrefix, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.count), withTemplate: "")
+    
+        let double = (amountWithPrefix as NSString).doubleValue
+//        number = NSNumber(value: (double / 100))
+        number = NSNumber(value: double)
+    
+        // if first number is 0 or all numbers were deleted
+        guard number != 0 as NSNumber else {
+            return ""
+        }
+    
+        return formatter.string(from: number)!
+    }
+}

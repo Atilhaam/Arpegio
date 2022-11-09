@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseStorage
+import RxSwift
 
 final class StorageManager {
     
@@ -15,6 +16,30 @@ final class StorageManager {
     private let storage = Storage.storage().reference()
     
     public typealias UploadPictureCompletion = (Result<String, Error>) -> Void
+    
+//    public func uploadProfilePictureWithRx(with data: Data, fileName: String) -> Observable<Result<String, Error>> {
+//        return Observable<>
+//        storage.child("images/\(fileName)").putData(data, metadata: nil, completion: { metadata, error in
+//            guard error == nil else {
+//                //failed
+//                print("Failed to upload data to firebase for picture")
+//                completion(.failure(StorageErrors.failedToUpload))
+//                return
+//            }
+//            
+//            self.storage.child("images/\(fileName)").downloadURL(completion: { url, error in
+//                guard let url = url else {
+//                    print("failed to get download url")
+//                    completion(.failure(StorageErrors.failedToGetDownloadUrl))
+//                    return
+//                }
+//                
+//                let urlString = url.absoluteString
+//                print("download url returned: \(urlString)")
+//                completion(.success(urlString))
+//            })
+//        })
+//    }
     
     public func uploadProfilePicture(with data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
         storage.child("images/\(fileName)").putData(data, metadata: nil, completion: { metadata, error in

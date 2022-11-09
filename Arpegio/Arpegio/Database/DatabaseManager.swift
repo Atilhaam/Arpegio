@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseDatabase
+import RxSwift
 
 final class DatabaseManager {
     static let shared = DatabaseManager()
@@ -89,6 +90,128 @@ extension DatabaseManager {
          ]
      }
      */
+    public func insertProductWithRx(with email: String, product: ProductDetail) -> Observable<Bool> {
+        return Observable<Bool>.create { observer in
+            let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+
+            let ref = self.database.child("\(safeEmail)")
+            
+            ref.observeSingleEvent(of: .value, with: { [weak self] snapshot in
+
+                guard var userNode = snapshot.value as? [String:Any] else {
+                    observer.onNext(false)
+                    print("user not found")
+                    return
+                }
+                
+    //            let productId = UUID().uuidString
+                let productData: [String: Any] = [
+                    "id": product.id,
+                    "picture": product.pictureUrl,
+                    "category": product.category,
+                    "name": product.name,
+                    "price": product.price,
+                    "condition": product.condition,
+                    "desc": product.desc,
+                    "location": product.location
+                ]
+                
+                //nambahin ke head products
+                self?.database.child("products").observeSingleEvent(of: .value, with: { snapshot in
+                    if var productCollections = snapshot.value as? [[String: Any]] {
+                        productCollections.append(productData)
+                        
+                        self?.database.child("products").setValue(productCollections, withCompletionBlock: { error, _ in
+                            guard error == nil else {
+                                observer.onNext(false)
+                                print("gagal")
+                                return
+                            }
+                            observer.onNext(true)
+                        })
+                    } else {
+                        let newCollection: [[String:Any]] = [
+                            productData
+                        ]
+                        self?.database.child("products").setValue(newCollection, withCompletionBlock: { error, _ in
+                            guard error == nil else {
+                                observer.onNext(false)
+                                return
+                            }
+                            observer.onNext(true)
+                        })
+                    }
+                })
+                
+                //nambahin ke head categoryproducts
+                self?.database.child(product.category).observeSingleEvent(of: .value, with: { snapshot in
+                    if var productCollections = snapshot.value as? [[String: Any]] {
+                        productCollections.append(productData)
+                        
+                        self?.database.child(product.category).setValue(productCollections, withCompletionBlock: { error, _ in
+                            guard error == nil else {
+                                observer.onNext(false)
+                                print("gagal")
+                                return
+                            }
+                            observer.onNext(true)
+                        })
+                    } else {
+                        let newCollection: [[String:Any]] = [
+                            productData
+                        ]
+                        self?.database.child(product.category).setValue(newCollection, withCompletionBlock: { error, _ in
+                            guard error == nil else {
+                                observer.onNext(false)
+                                return
+                            }
+                            observer.onNext(true)
+                        })
+                    }
+                })
+                
+                //nambahin ke head productid
+                self?.database.child("\(product.id)").setValue(productData, withCompletionBlock: { error, _ in
+                    guard error == nil else {
+                        observer.onNext(false)
+                        return
+                    }
+                    observer.onNext(true)
+                })
+                
+                //nambahin ke head user
+                if var products = userNode["products"] as? [[String:Any]] {
+                    products.append(productData)
+                    userNode["products"] = products
+                    ref.setValue(userNode, withCompletionBlock: { error, _ in
+                        guard error == nil else {
+                            observer.onNext(false)
+                            return
+                        }
+                        observer.onNext(true)
+                    })
+                } else {
+                    userNode["products"] = [
+                        productData
+                    ]
+                    
+                    ref.setValue(userNode, withCompletionBlock: { error, _ in
+                        guard error == nil else {
+                            observer.onNext(false)
+                            return
+                        }
+                        observer.onNext(true)
+                        observer.onCompleted()
+                    })
+                }
+                
+                
+            })
+            return Disposables.create()
+        }
+    }
+    
+    
     public func insertProduct(with email: String, product: ProductDetail, completion: @escaping ((Bool) -> Void)) {
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
 
@@ -102,16 +225,16 @@ extension DatabaseManager {
                 return
             }
             
-            let productId = UUID().uuidString
+//            let productId = UUID().uuidString
             let productData: [String: Any] = [
-                "id": productId,
-                "picture": "",
-                "category": "",
-                "name": "",
-                "price": "",
-                "condition": "",
-                "desc": "",
-                "location": ""
+                "id": product.id,
+                "picture": product.pictureUrl,
+                "category": product.category,
+                "name": product.name,
+                "price": product.price,
+                "condition": product.condition,
+                "desc": product.desc,
+                "location": product.location
             ]
             
             //nambahin ke head products
@@ -169,7 +292,7 @@ extension DatabaseManager {
             })
             
             //nambahin ke head productid
-            self?.database.child("\(productId)").setValue(productData, withCompletionBlock: { error, _ in
+            self?.database.child("\(product.id)").setValue(productData, withCompletionBlock: { error, _ in
                 guard error == nil else {
                     completion(false)
                     return
@@ -293,13 +416,18 @@ extension DatabaseManager {
      */
 }
 struct ProductDetail {
+    let id: String
     let category: String
-    let picture: String
     let name: String
     let price: String
     let condition: String
     let desc: String
     let location: String
+    
+    
+    var pictureUrl: String {
+        return "\(id)_product_picture.png"
+    }
 }
 
 struct ProductType {

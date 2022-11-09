@@ -14,10 +14,26 @@ import JGProgressHUD
 class RegisterViewController: UIViewController {
     
     private let spinner = JGProgressHUD(style: .dark)
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.clipsToBounds = true
+        return scrollView
+    }()
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Daftar dengan Email")
         imageView.contentMode = .left
+        return imageView
+    }()
+    
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.circle")
+        imageView.tintColor = .gray
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
         return imageView
     }()
     
@@ -109,18 +125,44 @@ class RegisterViewController: UIViewController {
         view.backgroundColor = .white
         setupView()
         setupRx()
-
-        // Do any additional setup after loading the view.
+        scrollView.frame = view.bounds
+        scrollView.contentSize = self.view.frame.size
+    }
+    
+    private func setupView() {
+        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        view.addSubview(scrollView)
+        scrollView.addSubview(imageView)
+        scrollView.addSubview(profileImageView)
+        scrollView.addSubview(nameField)
+        scrollView.addSubview(lastNameField)
+        scrollView.addSubview(emailField)
+        scrollView.addSubview(passwordField)
+        scrollView.addSubview(confirmationPasswordField)
+        scrollView.addSubview(registerButton)
+        registerButton.isEnabled = false
+        registerButton.imageView?.image = UIImage(named: "buttonDaftarFail")
+        
+        let textfields: [UITextField] = [nameField,lastNameField,emailField,passwordField,confirmationPasswordField]
+        
+        for textfield in textfields {
+            setupTextFields(for: textfield)
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageView.frame = CGRect(x: view.left + 20,
-                                 y: view.height / 10,
+                                 y: 20,
                                  width: view.frame.width - 120,
                                  height: 52)
+        profileImageView.frame = CGRect(x: (view.frame.width - (view.frame.width/3))/2,
+                                        y: imageView.bottom + 20,
+                                        width: view.frame.width/3,
+                                        height: view.frame.width/3)
+        profileImageView.layer.cornerRadius = profileImageView.width / 2.0
         nameField.frame = CGRect(x: view.left + 20,
-                                  y: imageView.bottom + 20,
+                                  y: profileImageView.bottom + 20,
                                   width: view.frame.width - 40,
                                   height: 52)
         lastNameField.frame = CGRect(x: view.left + 20,
@@ -146,26 +188,6 @@ class RegisterViewController: UIViewController {
                                   height: 52)
         
     }
-    
-    private func setupView() {
-        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
-        view.addSubview(imageView)
-        view.addSubview(nameField)
-        view.addSubview(lastNameField)
-        view.addSubview(emailField)
-        view.addSubview(passwordField)
-        view.addSubview(confirmationPasswordField)
-        view.addSubview(registerButton)
-        registerButton.isEnabled = false
-        registerButton.imageView?.image = UIImage(named: "buttonDaftarFail")
-        
-        let textfields: [UITextField] = [nameField,lastNameField,emailField,passwordField,confirmationPasswordField]
-        
-        for textfield in textfields {
-            setupTextFields(for: textfield)
-        }
-    }
-    
     
     @objc private func registerButtonTapped() {
         guard let email = emailField.text,

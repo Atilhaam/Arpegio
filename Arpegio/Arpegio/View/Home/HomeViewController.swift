@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import AsyncDisplayKit
 
-public final class HomeViewController: ASDKViewController<ASScrollNode> {
+class HomeViewController: ASDKViewController<ASScrollNode> {
     
     private let rootNode: ASScrollNode = {
         let rootNode = ASScrollNode()
@@ -64,7 +64,7 @@ public final class HomeViewController: ASDKViewController<ASScrollNode> {
         rootNode.layoutSpecBlock = { [weak self] _, _ -> ASLayoutSpec in
             guard let self = self else { return .init() }
             let insetedCollection = ASInsetLayoutSpec(insets: .init(top: 0, left: 8, bottom: 0, right: 8), child: self.itemCollectionNode)
-            let insetedTextfield = ASInsetLayoutSpec(insets: .init(top: 0, left: 8, bottom: 0, right: 8), child: self.searchBar)
+//            let insetedTextfield = ASInsetLayoutSpec(insets: .init(top: 0, left: 8, bottom: 0, right: 8), child: self.searchBar)
             let insetedSearchBar = ASInsetLayoutSpec(insets: .init(top: 0, left: 8, bottom: 0, right: 8), child: self.searchNode)
             return ASStackLayoutSpec(direction: .vertical, spacing: 8, justifyContent: .start, alignItems: .stretch, children: [
                 insetedSearchBar,
@@ -76,8 +76,7 @@ public final class HomeViewController: ASDKViewController<ASScrollNode> {
         print("\(self.view.height) ini height")
     }
     
-    public override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
         validateAuth()
     }
