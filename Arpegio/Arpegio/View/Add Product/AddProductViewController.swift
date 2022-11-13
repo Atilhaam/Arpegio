@@ -170,6 +170,7 @@ class AddProductViewController: UIViewController {
     
     private func setupView() {
         self.backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        self.tambahButton.addTarget(self, action: #selector(didtapTambah), for: .touchUpInside)
         self.productPriceField.keyboardType = .numberPad
         self.contactTextfield.keyboardType = .numberPad
         view.addSubview(scrollView)
@@ -353,19 +354,59 @@ class AddProductViewController: UIViewController {
         var priceToInt = price.replacingOccurrences(of: "Rp", with: "")
         priceToInt = priceToInt.replacingOccurrences(of: ".", with: "")
         let product = ProductDetail(id: id, category: category, name: name, price: priceToInt, condition: condition, desc: description, location: location)
-        DatabaseManager.shared.insertProductWithRx(with: safeEmail, product: product)
-            .observe(on: MainScheduler.instance)
-            .subscribe { success in
-                if success {
-                    StorageManager.shared.uploadProductPicture(with: <#T##Data#>, fileName: <#T##String#>, completion: <#T##UploadPictureCompletion#>)
-                }
+//        DatabaseManager.shared.insertProductWithRx(with: safeEmail, product: product)
+//            .observe(on: MainScheduler.instance)
+//            .subscribe { success in
+//                if success {
+////                    StorageManager.shared.uploadProductPicture(with: <#T##Data#>, fileName: <#T##String#>, completion: { })
+//                    print("success")
+//                } else {
+//
+//                }
+//            }
+        DatabaseManager.shared.insertProduct(with: safeEmail, product: product) { [weak self] success in
+            guard let strongSelf = self else {
+                return
             }
+            
+            if success {
+                DispatchQueue.main.async {
+                    strongSelf.spinner.dismiss()
+                }
+                guard let image = strongSelf.imageView.image,
+                        let data = image.pngData() else {
+                    print("image is nil")
+                    return
+                }
+                let fileName = product.pictureUrl
+                StorageManager.shared.uploadProductPicture(with: data, fileName: fileName) { result in
+                    switch result {
+                    case .success(let downloadUrl):
+                        print(downloadUrl)
+                    case .failure(let error):
+                        print("Storage manage error: \(error)")
+                    }
+                }
+            } else {
+                print("gagal")
+                strongSelf.alertError()
+            }
+            strongSelf.navigationController?.dismiss(animated: true)
+        }
         
         
     }
     
     @objc func backAction() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func alertError(message: String = "Tambah produk gagal") {
+        let alert = UIAlertController(title: "Oops",
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true)
     }
     
     private func alertLoginUserError(message: String = "Please enter all Information Correctly") {
