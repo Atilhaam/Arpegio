@@ -228,13 +228,15 @@ extension DatabaseManager {
 //            let productId = UUID().uuidString
             let productData: [String: Any] = [
                 "id": product.id,
-                "picture": product.pictureUrl,
+                "pictureUrl": product.pictureUrl,
                 "category": product.category,
                 "name": product.name,
                 "price": product.price,
                 "condition": product.condition,
                 "desc": product.desc,
-                "location": product.location
+                "location": product.location,
+                "email": safeEmail,
+                "contact" : product.contactNumber
             ]
             
             //nambahin ke head products
@@ -389,6 +391,38 @@ extension DatabaseManager {
         })
     }
     
+    public func getAllProducts() -> Observable<[ItemProductModel]> {
+        return Observable<[ItemProductModel]>.create { [weak self] observer in
+            self?.database.child("products").observe(.value, with: { snapshot in
+                guard let value = snapshot.value as? [[String:Any]] else {
+                    observer.onError(URLError.invalidResponse)
+                    return
+                }
+                let products: [ItemProductModel] = value.compactMap { dictionary in
+                    guard let productId = dictionary["id"] as? String,
+                          let category = dictionary["category"] as? String,
+                          let name = dictionary["name"] as? String,
+                          let price = dictionary["price"] as? String,
+                          let condition = dictionary["condition"] as? String,
+                          let desc = dictionary["desc"] as? String,
+                          let location = dictionary["location"] as? String,
+                          let pictureUrl = dictionary["pictureUrl"] as? String,
+                            let contact = dictionary["contact"] as? String
+    
+                    else {
+                        observer.onError(URLError.invalidResponse)
+                        return nil
+                    }
+                    return ItemProductModel(id: productId, category: category, name: name, price: price, condition: condition, desc: desc, location: location, pictureUrl: pictureUrl, contactNumber: contact)
+                }
+                observer.onNext(products)
+            })
+            return Disposables.create()
+        }
+    }
+    
+    
+    
     public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         database.child("users").observeSingleEvent(of: .value, with: { snapshot in
             guard let value = snapshot.value as? [[String: String]] else {
@@ -423,11 +457,12 @@ struct ProductDetail {
     let condition: String
     let desc: String
     let location: String
+    let pictureUrl: String
+    let contactNumber: String
     
-    
-    var pictureUrl: String {
-        return "\(id)_product_picture.png"
-    }
+//    var pictureFileName: String {
+//        return "\(id)_product_picture.png"
+//    }
 }
 
 struct ProductType {

@@ -15,6 +15,9 @@ target 'Arpegio' do
   pod 'RxCocoa'
   pod 'JGProgressHUD'
   pod 'GoogleSignIn'
+  pod 'SDWebImage'
+  pod 'IQKeyboardManagerSwift'
+
 
 
 end
