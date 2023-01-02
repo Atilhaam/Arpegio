@@ -408,7 +408,6 @@ extension DatabaseManager {
                           let location = dictionary["location"] as? String,
                           let pictureUrl = dictionary["pictureUrl"] as? String,
                             let contact = dictionary["contact"] as? String
-    
                     else {
                         observer.onError(URLError.invalidResponse)
                         return nil

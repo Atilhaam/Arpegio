@@ -103,7 +103,7 @@ class DetailProductTableViewCell: UITableViewCell {
     
     let contactLabel: UILabel = {
         let locationLabel = UILabel()
-        locationLabel.text = "Lokasi"
+        locationLabel.text = "Nomor Telpon"
         locationLabel.font = UIFont.boldSystemFont(ofSize: 20)
         return locationLabel
     }()

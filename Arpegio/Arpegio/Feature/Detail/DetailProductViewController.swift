@@ -8,6 +8,7 @@
 import UIKit
 import JGProgressHUD
 import SDWebImage
+import RxSwift
 
 class DetailProductViewController: UIViewController {
     
@@ -22,9 +23,21 @@ class DetailProductViewController: UIViewController {
         return tableView
     }()
     
+    let favoriteButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        button.layer.cornerRadius = 30
+        let image = UIImage(systemName: "heart",
+                            withConfiguration: UIImage.SymbolConfiguration(pointSize: 32, weight: .medium))
+        button.setImage(image, for: .normal)
+        button.backgroundColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.navigationBar.prefersLargeTitles = false
         title = "Detail"
         setupTableView()
 
@@ -38,10 +51,10 @@ class DetailProductViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-//            favoriteButton.widthAnchor.constraint(equalToConstant: 60),
-//            favoriteButton.heightAnchor.constraint(equalToConstant: 60),
-//            favoriteButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10),
-//            favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            favoriteButton.widthAnchor.constraint(equalToConstant: 60),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 60),
+            favoriteButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10),
+            favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
@@ -77,7 +90,7 @@ extension DetailProductViewController: UITableViewDelegate, UITableViewDataSourc
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 1500
+        return 1300
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
