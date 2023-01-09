@@ -16,6 +16,8 @@ class DetailProductViewController: UIViewController {
     
     var product: ItemProductModel? = nil
     
+    private let disposeBag = DisposeBag()
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(DetailProductTableViewCell.self, forCellReuseIdentifier: DetailProductTableViewCell.identifier)
@@ -34,18 +36,87 @@ class DetailProductViewController: UIViewController {
         return button
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkFavorite()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = false
         title = "Detail"
+        favoriteButton.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
         setupTableView()
-
+    }
+    
+    func checkFavorite() {
+        guard let product = product else {
+            print("product kosong")
+            return
+        }
+        LocaleDataSource.shared.checkFavorite(id: product.id)
+            .observe(on: MainScheduler.instance)
+            .subscribe { favorite in
+                if favorite {
+                    DispatchQueue.main.async {
+                        self.favoriteButton.backgroundColor = .red
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.favoriteButton.backgroundColor = .white
+                    }
+                }
+            } onError: { error in
+                print(error.localizedDescription)
+            } onCompleted: {
+                print("tidak ada error")
+            }.disposed(by: disposeBag)
+    }
+    
+    @objc func addFavorite() {
+        guard let product = self.product else {
+            print("product kosong")
+            return
+        }
+        if self.favoriteButton.backgroundColor == .white {
+            LocaleDataSource.shared.addConvertedProductToFavorite(product: product)
+                .observe(on: MainScheduler.instance)
+                .subscribe { success in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.favoriteButton.backgroundColor = .red
+                        }
+                    } else {
+                        print("gagal")
+                    }
+                } onError: { error in
+                    print(error.localizedDescription)
+                } onCompleted: {
+                    print("Berhasil")
+                }.disposed(by: disposeBag)
+        } else {
+            LocaleDataSource.shared.removeProductFromFavorite(id: product.id)
+                .observe(on: MainScheduler.instance)
+                .subscribe { success in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.favoriteButton.backgroundColor = .white
+                        }
+                    } else {
+                        print("gagal")
+                    }
+                } onError: { error in
+                    print(error.localizedDescription)
+                } onCompleted: {
+                    print("Berhasil")
+                }.disposed(by: disposeBag)
+        }
     }
     
     func setupTableView() {
         view.addSubview(tableView)
-//        view.addSubview(favoriteButton)
+        view.addSubview(favoriteButton)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

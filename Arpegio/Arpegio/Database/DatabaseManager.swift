@@ -391,6 +391,35 @@ extension DatabaseManager {
         })
     }
     
+    public func getMyProducts(for email: String) -> Observable<[ItemProductModel]> {
+        return Observable<[ItemProductModel]>.create { [weak self] observer in
+            self?.database.child("\(email)/products").observe(.value, with: { snapshot in
+                guard let value = snapshot.value as? [[String:Any]] else {
+                    observer.onError(URLError.invalidResponse)
+                    return
+                }
+                let products: [ItemProductModel] = value.compactMap { dictionary in
+                    guard let productId = dictionary["id"] as? String,
+                          let category = dictionary["category"] as? String,
+                          let name = dictionary["name"] as? String,
+                          let price = dictionary["price"] as? String,
+                          let condition = dictionary["condition"] as? String,
+                          let desc = dictionary["desc"] as? String,
+                          let location = dictionary["location"] as? String,
+                          let pictureUrl = dictionary["pictureUrl"] as? String,
+                            let contact = dictionary["contact"] as? String
+                    else {
+                        observer.onError(URLError.invalidResponse)
+                        return nil
+                    }
+                    return ItemProductModel(id: productId, category: category, name: name, price: price, condition: condition, desc: desc, location: location, pictureUrl: pictureUrl, contactNumber: contact)
+                }
+                observer.onNext(products)
+            })
+            return Disposables.create()
+        }
+    }
+    
     public func getAllProducts() -> Observable<[ItemProductModel]> {
         return Observable<[ItemProductModel]>.create { [weak self] observer in
             self?.database.child("products").observe(.value, with: { snapshot in

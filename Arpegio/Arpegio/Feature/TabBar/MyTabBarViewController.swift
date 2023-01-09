@@ -31,19 +31,25 @@ class MyTabBarViewController: UITabBarController {
         
         let profileViewController = UINavigationController(rootViewController: ProfileViewController())
         
+        let myProductViewController = UINavigationController(rootViewController: MyProductViewController())
+        
+        let favoriteProduct = UINavigationController(rootViewController: FavoriteViewController())
+        
         let addProductViewController = UINavigationController(rootViewController: AddProductViewController())
         
         
         homeViewController.tabBarItem = UITabBarItem(title: "Explore", image: UIImage(systemName: "house"), tag: 0)
-        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 2)
+        favoriteProduct.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(systemName: "bookmark"), tag: 1)
+        myProductViewController.tabBarItem = UITabBarItem(title: "My Product", image: UIImage(systemName: "bag.fill"), tag: 3)
+        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 4)
         addProductViewController.tabBarItem = UITabBarItem(title: nil, image: nil, selectedImage: nil)
 
         
-        viewControllers = [homeViewController,addProductViewController,profileViewController]
+        viewControllers = [homeViewController,favoriteProduct,addProductViewController,myProductViewController, profileViewController]
         
     
         for i in 0 ..< viewControllers!.count {
-            if i == 1 {
+            if i == 2 {
                 viewControllers![i].tabBarController?.tabBar.addSubview(middleButton)
                 middleButton.center = CGPoint(x: self.view.frame.width / 2, y: 25)
                 middleButton.layer.shadowColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1).cgColor

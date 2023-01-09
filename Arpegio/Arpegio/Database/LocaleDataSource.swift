@@ -15,6 +15,8 @@ protocol LocaleDataSourceProtocl: class {
 
 final class LocaleDataSource: NSObject {
     
+    static let shared = LocaleDataSource()
+    
     private let realm: Realm? = try? Realm()
 //    private init(realm: Realm?) {
 //        self.realm = realm
@@ -40,6 +42,16 @@ extension LocaleDataSource: LocaleDataSourceProtocl {
             }
             return Disposables.create()
         }
+    }
+    
+    func getConvertedFavoriteProducts() -> Observable<[ItemProductModel]> {
+        return getFavoriteProducts()
+            .map { ProductMapper.mapProductFavoriteEntitiesToDomains(input: $0) }
+    }
+    
+    func addConvertedProductToFavorite(product: ItemProductModel) -> Observable<Bool> {
+        return getProductFavoriteInfo(from: product)
+            .flatMap { self.addProductToFavorite(from: $0) }
     }
     
     func addProductToFavorite(from product: ProductFavoriteEntity) -> Observable<Bool> {
