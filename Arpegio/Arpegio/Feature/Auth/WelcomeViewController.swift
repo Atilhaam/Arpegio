@@ -6,97 +6,120 @@
 //
 
 import UIKit
-import AsyncDisplayKit
+import Foundation
 import GoogleSignIn
 import FirebaseAuth
 import FirebaseCore
 
-
-public final class WelcomeViewController: ASDKViewController<ASDisplayNode> {
+class WelcomeViewController: UIViewController {
     
-    private let rootNode: ASScrollNode = {
-        let rootNode = ASScrollNode()
-        rootNode.automaticallyManagesSubnodes = true
-        rootNode.automaticallyManagesContentSize = true
-        rootNode.scrollableDirections = [.up, .down]
-        rootNode.backgroundColor = .white
-       return rootNode
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.clipsToBounds = true
+        return scrollView
     }()
     
-    private let rootNode2 : ASDisplayNode = {
-        let rootNode = ASDisplayNode()
-        rootNode.automaticallyManagesSubnodes = true
-        rootNode.backgroundColor = .white
-        return rootNode
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "logoSementara")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
-    private let logoImageNode: ASImageNode = {
-        let imageNode = ASImageNode()
-        imageNode.image = UIImage(named: "logoSementara")
-        imageNode.style.width = .init(unit: .points, value: 300)
-        imageNode.style.height = .init(unit: .points, value: 300)
-        return imageNode
-    }()
-    
-    private let signInWithEmailButtonNode: ASButtonNode = {
-       let button = ASButtonNode()
-        button.setImage(UIImage(named: "buttonLoginEmail"), for: .normal)
-        button.style.width = .init(unit: .fraction, value: 1)
-        button.style.height = .init(unit: .points, value: 56)
+    private let loginWithEmailButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = UIColor(named: "primaryColor")
+        button.setImage(UIImage(systemName: "envelope.fill"), for: .normal)
+        button.imageEdgeInsets.right = 10
+        button.setTitle("Masuk dengan Email", for: .normal)
+        button.setTitleColor(UIColor(named: "primaryColor"), for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor(named: "primaryColor")?.cgColor
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 21)
         return button
     }()
     
-    private let signInWithGoogleButtonNode: ASButtonNode = {
-       let button = ASButtonNode()
-        button.setImage(UIImage(named: "buttonLoginGoogle"), for: .normal)
-        button.style.width = .init(unit: .fraction, value: 1)
-        button.style.height = .init(unit: .points, value: 56)
+    private let loginWithGoogleButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = UIColor(named: "primaryColor")
+        button.setImage(UIImage(named: "googleLogo"), for: .normal)
+        button.imageEdgeInsets.right = 10
+        button.setTitle("Masuk dengan Google", for: .normal)
+        button.setTitleColor(UIColor(named: "primaryColor"), for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor(named: "primaryColor")?.cgColor
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 21)
         return button
     }()
     
-    private let signInWithAppleButtonNode: ASButtonNode = {
-       let button = ASButtonNode()
-        button.imageNode.image = UIImage(named: "buttonLoginEmail")
-        button.style.width = .init(unit: .fraction, value: 1)
-        button.style.height = .init(unit: .points, value: 56)
+    private let signUpButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = UIColor(named: "primaryColor")
+        button.setImage(UIImage(named: "googleLogo"), for: .normal)
+        button.imageEdgeInsets.right = 10
+        button.setTitle("Masuk dengan Google", for: .normal)
+        button.setTitleColor(UIColor(named: "primaryColor"), for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor(named: "primaryColor")?.cgColor
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 21)
         return button
     }()
     
-    private let signUpButton: ASButtonNode = {
-       let button = ASButtonNode()
-        button.style.width = .init(unit: .fraction, value: 1)
-        button.setImage(UIImage(named: "buttonSignUp"), for: .normal)
-        button.style.height = .init(unit: .points, value: 56)
-        return button
+    private let registerText: UILabel = {
+        let label = UILabel()
+        let string = NSMutableAttributedString(string: "Belum punya akun? Daftar sekarang")
+        string.setColorForText("Daftar sekarang", with: UIColor(named: "primaryColor") ?? .black)
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.attributedText = string
+        return label
     }()
     
-    public override init() {
-        super.init(node: rootNode2)
-        signInWithEmailButtonNode.addTarget(self, action: #selector(loginWithEmailButtonTapped), forControlEvents: .touchUpInside)
-        signInWithGoogleButtonNode.addTarget(self, action: #selector(googleSignInTapped), forControlEvents: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(registerButtonTapped), forControlEvents: .touchUpInside)
-        rootNode2.layoutSpecBlock = { [weak self] _, _ -> ASLayoutSpec in
-            guard let self = self else {
-                return .init()
-            }
-            let insetedImageNode = ASInsetLayoutSpec(insets: .init(top: self.view.height / 20, left: 16, bottom: 0, right: 16), child: self.logoImageNode)
-            let buttonStack = ASStackLayoutSpec(direction: .vertical, spacing: 16, justifyContent: .start, alignItems: .center, children: [
-                self.signInWithEmailButtonNode,
-                self.signInWithGoogleButtonNode,
-                self.signInWithAppleButtonNode,
-                self.signUpButton
-            ])
-            let insetedButtonStack = ASInsetLayoutSpec(insets: .init(top: 0, left: 16, bottom: 0, right: 16), child: buttonStack)
-            
-            return ASStackLayoutSpec(direction: .vertical, spacing: self.view.height / 20, justifyContent: .start, alignItems: .center, children: [
-                insetedImageNode,
-                insetedButtonStack
-            ])
-            
-        }
-        print(self.view.height / 20)
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupView()
+    }
+    
+    private func setupView() {
+        loginWithEmailButton.addTarget(self, action: #selector(loginWithEmailButtonTapped), for: .touchUpInside)
+        loginWithGoogleButton.addTarget(self, action: #selector(googleSignInTapped), for: .touchUpInside)
+        view.addSubview(scrollView)
+        scrollView.addSubview(imageView)
+        scrollView.addSubview(loginWithEmailButton)
+        scrollView.addSubview(loginWithGoogleButton)
+        scrollView.addSubview(registerText)
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.registerButtonTapped))
+        registerText.isUserInteractionEnabled = true
+        registerText.addGestureRecognizer(tap)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        super.viewDidLayoutSubviews()
+        scrollView.frame = view.bounds
+        let size = scrollView.width / 1.5
+        imageView.frame = CGRect(x: (scrollView.width - size)/2,
+                                 y: view.height / 50,
+                                 width: scrollView.width / 1.5,
+                                 height: scrollView.width / 1.5)
+        loginWithEmailButton.frame = CGRect(x: 30,
+                                            y: imageView.bottom + 50,
+                                            width: scrollView.width - 60,
+                                            height: 52)
+        loginWithGoogleButton.frame = CGRect(x: 30,
+                                             y: loginWithEmailButton.bottom + 10,
+                                             width: scrollView.width - 60,
+                                             height: 52)
+        registerText.frame = CGRect(x: 30,
+                                    y: loginWithGoogleButton.bottom + 10,
+                                    width: scrollView.width - 60,
+                                    height: 52)
     }
     
     @objc private func googleSignInTapped() {
