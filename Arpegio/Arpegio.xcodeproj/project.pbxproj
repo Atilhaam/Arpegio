@@ -16,6 +16,7 @@
 		6735CD46296522D000430877 /* MyProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6735CD45296522D000430877 /* MyProductViewController.swift */; };
 		6735CD482965362A00430877 /* MyProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6735CD472965362A00430877 /* MyProductTableViewCell.swift */; };
 		676DF17A2939C59C00D2E1F2 /* DetailProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676DF1792939C59C00D2E1F2 /* DetailProductTableViewCell.swift */; };
+		677525472974F1F700D0BE83 /* RemoteFavoriteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677525462974F1F700D0BE83 /* RemoteFavoriteDataSource.swift */; };
 		6777AB952946C6D700DF7DE4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 6777AB942946C6D700DF7DE4 /* Realm */; };
 		6777AB972946C6D700DF7DE4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6777AB962946C6D700DF7DE4 /* RealmSwift */; };
 		6777AB992948107700DF7DE4 /* ProductFavoriteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6777AB982948107700DF7DE4 /* ProductFavoriteEntity.swift */; };
@@ -71,6 +72,7 @@
 		6735CD45296522D000430877 /* MyProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductViewController.swift; sourceTree = "<group>"; };
 		6735CD472965362A00430877 /* MyProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductTableViewCell.swift; sourceTree = "<group>"; };
 		676DF1792939C59C00D2E1F2 /* DetailProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProductTableViewCell.swift; sourceTree = "<group>"; };
+		677525462974F1F700D0BE83 /* RemoteFavoriteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFavoriteDataSource.swift; sourceTree = "<group>"; };
 		6777AB982948107700DF7DE4 /* ProductFavoriteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFavoriteEntity.swift; sourceTree = "<group>"; };
 		6777AB9A2948126700DF7DE4 /* LocaleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleDataSource.swift; sourceTree = "<group>"; };
 		6781FEFD2925F51E004A9E47 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				67C0B5772900E16100644C22 /* StorageManager.swift */,
 				6777AB982948107700DF7DE4 /* ProductFavoriteEntity.swift */,
 				6777AB9A2948126700DF7DE4 /* LocaleDataSource.swift */,
+				677525462974F1F700D0BE83 /* RemoteFavoriteDataSource.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				6735CD412962759200430877 /* FavoriteViewController.swift in Sources */,
 				676DF17A2939C59C00D2E1F2 /* DetailProductTableViewCell.swift in Sources */,
 				6777AB9B2948126700DF7DE4 /* LocaleDataSource.swift in Sources */,
+				677525472974F1F700D0BE83 /* RemoteFavoriteDataSource.swift in Sources */,
 				6793F1C028FEEAC600B84B5B /* AppDelegate.swift in Sources */,
 				67C0B56E28FFA7DF00644C22 /* Externsions.swift in Sources */,
 				67EDEA8B290AA0DE008BC5A8 /* SearchNode.swift in Sources */,

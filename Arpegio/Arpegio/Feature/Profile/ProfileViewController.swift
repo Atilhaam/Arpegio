@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 import AsyncDisplayKit
 import FirebaseAuth
 

@@ -47,13 +47,11 @@ class LoginViewController: UIViewController {
     
     private let loginButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "buttonMasukFail"), for: .normal)
-        return button
-    }()
-    
-    private let forgotButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "buttonForgot"), for: .normal)
+        button.setTitle("Masuk", for: .normal)
+        button.setTitleColor(.green, for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.backgroundColor = UIColor(named: "buttonColorFail")?.cgColor
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 21)
         return button
     }()
     
@@ -70,17 +68,13 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
-    
     private func setupView() {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        forgotButton.addTarget(self, action: #selector(forgotButtonTapped), for: .touchUpInside)
         view.addSubview(emailField)
         view.addSubview(passwordField)
         view.addSubview(loginButton)
-        view.addSubview(forgotButton)
         loginButton.isEnabled = false
-        loginButton.imageView?.image = UIImage(named: "buttonMasukFail")
+        loginButton.layer.backgroundColor = UIColor(named: "buttonColorFail")?.cgColor
         
         let textfields: [UITextField] = [emailField,passwordField]
         
@@ -121,10 +115,10 @@ class LoginViewController: UIViewController {
         invalidStream.subscribe(onNext: { isValid in
             if isValid {
                 self.loginButton.isEnabled = true
-                self.loginButton.imageView?.image = UIImage(named: "buttonMasukSuccess")
+                self.loginButton.layer.backgroundColor = UIColor(named: "primaryColor")?.cgColor
             } else {
                 self.loginButton.isEnabled = false
-                self.loginButton.imageView?.image = UIImage(named: "buttonMasukFail")
+                self.loginButton.layer.backgroundColor = UIColor(named: "buttonColorFail")?.cgColor
             }
         }).disposed(by: disposebag)
         
@@ -145,10 +139,10 @@ class LoginViewController: UIViewController {
                                   y: passwordField.bottom + 40,
                                   width: view.frame.width - 40,
                                   height: 52)
-        forgotButton.frame = CGRect(x: view.left + 20,
-                                  y: loginButton.bottom + 10,
-                                  width: view.frame.width - 40,
-                                  height: 52)
+//        forgotButton.frame = CGRect(x: view.left + 20,
+//                                  y: loginButton.bottom + 10,
+//                                  width: view.frame.width - 40,
+//                                  height: 52)
         
     }
     

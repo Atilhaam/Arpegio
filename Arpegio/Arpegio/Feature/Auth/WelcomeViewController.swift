@@ -10,6 +10,8 @@ import Foundation
 import GoogleSignIn
 import FirebaseAuth
 import FirebaseCore
+import AuthenticationServices
+
 
 class WelcomeViewController: UIViewController {
     
@@ -43,8 +45,9 @@ class WelcomeViewController: UIViewController {
     private let loginWithGoogleButton: UIButton = {
         let button = UIButton()
         button.tintColor = UIColor(named: "primaryColor")
-        button.setImage(UIImage(named: "googleLogo"), for: .normal)
+        button.setImage(UIImage(named: "google"), for: .normal)
         button.imageEdgeInsets.right = 10
+        button.imageView?.contentMode = .scaleAspectFit
         button.setTitle("Masuk dengan Google", for: .normal)
         button.setTitleColor(UIColor(named: "primaryColor"), for: .normal)
         button.layer.cornerRadius = 15
@@ -54,24 +57,11 @@ class WelcomeViewController: UIViewController {
         return button
     }()
     
-    private let signUpButton: UIButton = {
-        let button = UIButton()
-        button.tintColor = UIColor(named: "primaryColor")
-        button.setImage(UIImage(named: "googleLogo"), for: .normal)
-        button.imageEdgeInsets.right = 10
-        button.setTitle("Masuk dengan Google", for: .normal)
-        button.setTitleColor(UIColor(named: "primaryColor"), for: .normal)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1.0
-        button.layer.borderColor = UIColor(named: "primaryColor")?.cgColor
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 21)
-        return button
-    }()
     
     private let registerText: UILabel = {
         let label = UILabel()
         let string = NSMutableAttributedString(string: "Belum punya akun? Daftar sekarang")
-        string.setColorForText("Daftar sekarang", with: UIColor(named: "primaryColor") ?? .black)
+        string.setColorForText("Daftar sekarang", with: .blue)
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.textAlignment = .center
@@ -100,7 +90,6 @@ class WelcomeViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
         let size = scrollView.width / 1.5
@@ -203,11 +192,6 @@ class WelcomeViewController: UIViewController {
     @objc private func registerButtonTapped() {
         let vc = RegisterViewController()
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }

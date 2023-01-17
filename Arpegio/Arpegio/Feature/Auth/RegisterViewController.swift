@@ -19,12 +19,6 @@ class RegisterViewController: UIViewController {
         scrollView.clipsToBounds = true
         return scrollView
     }()
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Daftar dengan Email")
-        imageView.contentMode = .left
-        return imageView
-    }()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -114,7 +108,11 @@ class RegisterViewController: UIViewController {
     
     private let registerButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "buttonDaftarFail"), for: .normal)
+        button.setTitle("Daftar", for: .normal)
+        button.setTitleColor(.green, for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.backgroundColor = UIColor(named: "buttonColorFail")?.cgColor
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 21)
         return button
     }()
 
@@ -128,12 +126,12 @@ class RegisterViewController: UIViewController {
         setupRx()
         scrollView.frame = view.bounds
         scrollView.contentSize = self.view.frame.size
+        setupNavigationController()
     }
     
     private func setupView() {
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         view.addSubview(scrollView)
-        scrollView.addSubview(imageView)
         scrollView.addSubview(profileImageView)
         scrollView.addSubview(nameField)
         scrollView.addSubview(lastNameField)
@@ -142,7 +140,7 @@ class RegisterViewController: UIViewController {
         scrollView.addSubview(confirmationPasswordField)
         scrollView.addSubview(registerButton)
         registerButton.isEnabled = false
-        registerButton.imageView?.image = UIImage(named: "buttonDaftarFail")
+        registerButton.layer.backgroundColor = UIColor(named: "buttonColorFail")?.cgColor
         
         let textfields: [UITextField] = [nameField,lastNameField,emailField,passwordField,confirmationPasswordField]
         
@@ -151,19 +149,17 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    private func setupNavigationController() {
+        navigationItem.title = "Daftar dengan Email"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.tintColor = UIColor(named: "primaryColor")
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        imageView.frame = CGRect(x: view.left + 20,
-                                 y: 20,
-                                 width: view.frame.width - 120,
-                                 height: 52)
-        profileImageView.frame = CGRect(x: (view.frame.width - (view.frame.width/3))/2,
-                                        y: imageView.bottom + 20,
-                                        width: view.frame.width/3,
-                                        height: view.frame.width/3)
-        profileImageView.layer.cornerRadius = profileImageView.width / 2.0
         nameField.frame = CGRect(x: view.left + 20,
-                                  y: profileImageView.bottom + 20,
+                                 y: 20,
                                   width: view.frame.width - 40,
                                   height: 52)
         lastNameField.frame = CGRect(x: view.left + 20,
@@ -305,10 +301,10 @@ class RegisterViewController: UIViewController {
         invalidFieldsStream.subscribe(onNext: { isValid in
             if (isValid) {
                 self.registerButton.isEnabled = true
-                self.registerButton.imageView?.image = UIImage(named: "buttonDaftarSuccess")
+                self.registerButton.layer.backgroundColor = UIColor(named: "primaryColor")?.cgColor
             } else {
                 self.registerButton.isEnabled = false
-                self.registerButton.imageView?.image = UIImage(named: "buttonDaftarFail")
+                self.registerButton.layer.backgroundColor = UIColor(named: "buttonColorFail")?.cgColor
             }
         }).disposed(by: disposebag)
     }

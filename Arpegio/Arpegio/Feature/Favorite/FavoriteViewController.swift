@@ -19,21 +19,41 @@ class FavoriteViewController: UIViewController {
         return tableView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+            print("product kosong")
+            return
+        }
+        let safeEmail = RemoteFavoriteDataSource.safeEmail(emailAddress: email)
+        RemoteFavoriteDataSource.shared.getFavoriteProducts(for: safeEmail)
+            .observe(on: MainScheduler.instance)
+            .subscribe { result in
+                self.favProducts = result
+                self.tableView.reloadData()
+            } onError: { error in
+                print(error.localizedDescription)
+            } onCompleted: {
+                self.tableView.reloadData()
+                print("berhasil")
+            }.disposed(by: disposeBag)
+//        LocaleDataSource.shared.getConvertedFavoriteProducts()
+//            .observe(on: MainScheduler.instance)
+//            .subscribe { result in
+//                self.favProducts = result
+//            } onError: { error in
+//                print(error.localizedDescription)
+//            } onCompleted: {
+//                self.tableView.reloadData()
+//            }.disposed(by: disposeBag)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         navigationItem.title = "Favorite"
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
-        LocaleDataSource.shared.getConvertedFavoriteProducts()
-            .observe(on: MainScheduler.instance)
-            .subscribe { result in
-                self.favProducts = result
-            } onError: { error in
-                print(error.localizedDescription)
-            } onCompleted: {
-                self.tableView.reloadData()
-            }.disposed(by: disposeBag)
+        
     }
     
     func setupTableView() {

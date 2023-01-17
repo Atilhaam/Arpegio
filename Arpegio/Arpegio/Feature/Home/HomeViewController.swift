@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import FirebaseAuth
-import AsyncDisplayKit
 import RxSwift
 import SDWebImage
 

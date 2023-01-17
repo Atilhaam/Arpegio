@@ -51,11 +51,12 @@ class DetailProductViewController: UIViewController {
     }
     
     func checkFavorite() {
-        guard let product = product else {
+        guard let product = product, let email = UserDefaults.standard.value(forKey: "email") as? String else {
             print("product kosong")
             return
         }
-        LocaleDataSource.shared.checkFavorite(id: product.id)
+        let safeEmail = RemoteFavoriteDataSource.safeEmail(emailAddress: email)
+        RemoteFavoriteDataSource.shared.checkFavoriteById(with: safeEmail, product: product)
             .observe(on: MainScheduler.instance)
             .subscribe { favorite in
                 if favorite {
@@ -72,15 +73,34 @@ class DetailProductViewController: UIViewController {
             } onCompleted: {
                 print("tidak ada error")
             }.disposed(by: disposeBag)
+        
+//        LocaleDataSource.shared.checkFavorite(id: product.id)
+//            .observe(on: MainScheduler.instance)
+//            .subscribe { favorite in
+//                if favorite {
+//                    DispatchQueue.main.async {
+//                        self.favoriteButton.backgroundColor = .red
+//                    }
+//                } else {
+//                    DispatchQueue.main.async {
+//                        self.favoriteButton.backgroundColor = .white
+//                    }
+//                }
+//            } onError: { error in
+//                print(error.localizedDescription)
+//            } onCompleted: {
+//                print("tidak ada error")
+//            }.disposed(by: disposeBag)
     }
     
     @objc func addFavorite() {
-        guard let product = self.product else {
+        guard let product = self.product, let email = UserDefaults.standard.value(forKey: "email") as? String else {
             print("product kosong")
             return
         }
+        let safeEmail = RemoteFavoriteDataSource.safeEmail(emailAddress: email)
         if self.favoriteButton.backgroundColor == .white {
-            LocaleDataSource.shared.addConvertedProductToFavorite(product: product)
+            RemoteFavoriteDataSource.shared.addProductToFavorite(with: safeEmail, product: product)
                 .observe(on: MainScheduler.instance)
                 .subscribe { success in
                     if success {
@@ -95,8 +115,23 @@ class DetailProductViewController: UIViewController {
                 } onCompleted: {
                     print("Berhasil")
                 }.disposed(by: disposeBag)
+//            LocaleDataSource.shared.addConvertedProductToFavorite(product: product)
+//                .observe(on: MainScheduler.instance)
+//                .subscribe { success in
+//                    if success {
+//                        DispatchQueue.main.async {
+//                            self.favoriteButton.backgroundColor = .red
+//                        }
+//                    } else {
+//                        print("gagal")
+//                    }
+//                } onError: { error in
+//                    print(error.localizedDescription)
+//                } onCompleted: {
+//                    print("Berhasil")
+//                }.disposed(by: disposeBag)
         } else {
-            LocaleDataSource.shared.removeProductFromFavorite(id: product.id)
+            RemoteFavoriteDataSource.shared.removeProductFromFavorite(with: safeEmail, product: product)
                 .observe(on: MainScheduler.instance)
                 .subscribe { success in
                     if success {
@@ -111,6 +146,21 @@ class DetailProductViewController: UIViewController {
                 } onCompleted: {
                     print("Berhasil")
                 }.disposed(by: disposeBag)
+//            LocaleDataSource.shared.removeProductFromFavorite(id: product.id)
+//                .observe(on: MainScheduler.instance)
+//                .subscribe { success in
+//                    if success {
+//                        DispatchQueue.main.async {
+//                            self.favoriteButton.backgroundColor = .white
+//                        }
+//                    } else {
+//                        print("gagal")
+//                    }
+//                } onError: { error in
+//                    print(error.localizedDescription)
+//                } onCompleted: {
+//                    print("Berhasil")
+//                }.disposed(by: disposeBag)
         }
     }
     
