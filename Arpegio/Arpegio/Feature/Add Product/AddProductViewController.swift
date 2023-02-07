@@ -387,36 +387,6 @@ class AddProductViewController: UIViewController {
                 }
             }
         }
-//        DatabaseManager.shared.insertProduct(with: safeEmail, product: product) { [weak self] success in
-//            guard let strongSelf = self else {
-//                return
-//            }
-//
-//            if success {
-//                DispatchQueue.main.async {
-//                    strongSelf.spinner.dismiss()
-//                }
-//                guard let image = strongSelf.imageView.image,
-//                        let data = image.pngData() else {
-//                    print("image is nil")
-//                    return
-//                }
-//                let fileName = product.pictureUrl
-//                StorageManager.shared.uploadProductPicture(with: data, fileName: fileName) { result in
-//                    switch result {
-//                    case .success(let downloadUrl):
-//                        print(downloadUrl)
-//                    case .failure(let error):
-//                        print("Storage manage error: \(error)")
-//                    }
-//                }
-//            } else {
-//                print("gagal")
-//                strongSelf.alertError()
-//            }
-//            strongSelf.navigationController?.dismiss(animated: true)
-//        }
-        
         
     }
     

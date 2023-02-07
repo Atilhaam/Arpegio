@@ -23,7 +23,7 @@ class WelcomeViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logoSementara")
+        imageView.image = UIImage(named: "logoFInal")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
